@@ -7,8 +7,9 @@ Jinja2==3.0.1
 numpy==1.21.2
 Pillow==8.1.0
 requests==2.26.0
-torch
-torchvision
+-f https://download.pytorch.org/whl/torch_stable.html
+torch==1.9.0+cpu
+torchvision==0.10.0+cpu
 Werkzeug==2.0.1
 WTForms==2.3.3
 
