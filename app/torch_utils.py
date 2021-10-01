@@ -22,18 +22,12 @@ def get_prediction(image_tensor):
     if not model_path.exists():
         gdd.download_file_from_google_drive(file_id='1--JIPQ_1XMQuPanEu4cWdHH0Qw0yvvBY',
                                             dest_path='./cifar10_resnet18.pt', unzip=False)
-        print('Model downloaded')
-    else:
-        print('Model exists')
     model = torch.jit.load('./cifar10_resnet18.pt')
-    print('Model loaded')
     model.eval()
     with torch.no_grad():
         labels_pred: Tensor = model(image_tensor)
-        print('labels_pred.size():', labels_pred.size())
         labels_pred_max = labels_pred.argmax(dim=1, keepdim=True)
     labels_pred_max = labels_pred_max.cpu().numpy()
-    print('labels_preds_max converted:', type(labels_pred_max))
     return labels_pred_max
 
 
