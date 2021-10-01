@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from torch_utils import transform_image, get_prediction
+from app.torch_utils import transform_image, get_prediction
 from flask import render_template, flash, redirect, url_for
 import os
 import io
