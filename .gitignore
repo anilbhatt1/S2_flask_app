@@ -1,0 +1,6 @@
+.env
+/.idea
+*.pt
+cifar10_resnet18.pt
+/test
+*.jpg

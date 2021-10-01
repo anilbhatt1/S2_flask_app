@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    {% endfor %}
+
+    {% if predicted_dict %}
+        <h3> Image Classification result as below !</h3>
+        <br/><br/>
+        <p>Image Path : {{image_path}}</p>
+        <img src="{{image_path}}" >
+        <br/><br/>
+        {% for key in predicted_dict %}
+            <p class="card-text">
+                <strong> key         :</strong> {{ predicted_dict.get(key) }}<br/>
+            </p>
+        {% endfor %}
+        <br/><br/>
+
+    {% else %}
+        <h4>Welcome ! Please upload the image you wish to classify:</h4>
+        <br><br>
+        <form class="form-horizontal" action="/" method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" > Upload Your Image :</label>
+                <div class="col-sm-10">
+                    <input type="file" name="image" >
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <br><br>
+                </div>
+            </div>
+        </form>
+
+    {% endif %}
+
+{% endblock %}
