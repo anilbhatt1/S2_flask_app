@@ -37,7 +37,13 @@ def predict():
         print('prediction:', prediction)
         class_idx = int((prediction[0][0]))
         data = {'prediction': class_idx, 'class_name': cifar10_dict[class_idx]}
+        cwd = os.getcwd()
+        print('cwd:', cwd)
 
+        new_path = os.path.join(cwd, 'static', 'saved_images', file_name)
+        print('new_path:', new_path)
+        dir_path = os.path.join(cwd, 'static', 'saved_images')
+        print('Exists or not :', os.direxists(dir_path))
         image_path = os.path.join('static', 'saved_images', file_name)
         print('image_path:', image_path)
         im = Image.open(io.BytesIO(img_bytes))
