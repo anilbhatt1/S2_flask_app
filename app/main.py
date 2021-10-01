@@ -27,23 +27,28 @@ def predict():
             data = {'error':' Uploaded image format not supported'}
             return render_template("predict.html", predicted_dict=data)
 
-        try:
-            file_name = file.filename
-            img_bytes = file.read()
-            tensor, pil_img = transform_image(img_bytes)
-            prediction = get_prediction(tensor)
-            class_idx = int((prediction[0][0]))
-            data = {'prediction': class_idx, 'class_name': cifar10_dict[class_idx]}
+        #try:
+        file_name = file.filename
+        img_bytes = file.read()
+        print('img_bytes:', type(img_bytes))
+        tensor, pil_img = transform_image(img_bytes)
+        print('tensor.size():', tensor.size())
+        prediction = get_prediction(tensor)
+        print('prediction:', prediction)
+        class_idx = int((prediction[0][0]))
+        data = {'prediction': class_idx, 'class_name': cifar10_dict[class_idx]}
 
-            image_path = os.path.join('static', 'saved_images', file_name)
-            im = Image.open(io.BytesIO(img_bytes))
-            im.save(image_path)
+        image_path = os.path.join('static', 'saved_images', file_name)
+        print('image_path:', image_path)
+        im = Image.open(io.BytesIO(img_bytes))
+        im.save(image_path)
 
-            disp_img_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
-            return render_template("predict.html", predicted_dict=data, image_path=disp_img_path)
-        except:
-            data = {'error':'error during prediction'}
-            return render_template("predict.html", predicted_dict=data)
+        disp_img_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
+        print('disp_image_path:', disp_image_path)
+        return render_template("predict.html", predicted_dict=data, image_path=disp_img_path)
+        #except:
+        #    data = {'error':'error during prediction'}
+        #    return render_template("predict.html", predicted_dict=data)
     else:
         return render_template("predict.html")
 
