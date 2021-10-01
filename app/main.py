@@ -30,7 +30,7 @@ def predict():
             tensor, pil_img = transform_image(img_bytes)
             prediction = get_prediction(tensor)
             class_idx = int((prediction[0][0]))
-            out_data = {'prediction': class_idx, 'class_name': cifar10_dict[class_idx]}
+            out_data = {'Predicted class': class_idx, 'Class Name': cifar10_dict[class_idx]}
 
             im = Image.open(io.BytesIO(img_bytes))
             data = io.BytesIO()
