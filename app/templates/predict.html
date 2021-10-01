@@ -12,8 +12,7 @@
     {% if predicted_dict %}
         <h3> Image Classification result as below !</h3>
         <br/><br/>
-        <p>Image Path : {{image_path}}</p>
-        <img src="{{image_path}}" >
+        <img src="data:image/jpeg;base64,{{ img_data }}">
         <br/><br/>
         {% for key in predicted_dict %}
             <p class="card-text">
